@@ -3,7 +3,6 @@ const AdwardTeamsModel = require('./adwardTeams.model');
 const AdwardsModel = require('./adwards.model');
 const GameModesModel = require('./gameModes.model');
 const GameTypeGamesModel = require('./gameTypeGames.model');
-const GamesModel = require('./games.model');
 const GuestsModel = require('./guests.model');
 const MatchesModel = require('./matches.model');
 const OrganizersModel = require('./organizers.model');
@@ -29,7 +28,6 @@ module.exports = {
     AdwardsModel,
     GameModesModel,
     GameTypeGamesModel,
-    GamesModel,
     GuestsModel,
     MatchesModel,
     OrganizersModel,

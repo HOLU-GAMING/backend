@@ -5,7 +5,9 @@ const TeamsModel = dbConnection.define("teams", {
     type: DataTypes.INTEGER,
   },
   fundation_date: {
-    type: DataTypes.STRING,
+    type: DataTypes.DATEONLY,
+    allowNull: false,
+    defaultValue: DataTypes.NOW
   },
   image: {
     type: DataTypes.STRING,

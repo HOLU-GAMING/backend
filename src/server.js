@@ -1,9 +1,9 @@
-const express = require('express');
-const path = require('path');
-const cors = require('cors');
+const express = require("express");
+const path = require("path");
+const cors = require("cors");
 
-const dbConnectionSql = require('./configDB');
-
+const dbConnectionSql = require("./configDB");
+const fileUpload = require("express-fileupload");
 
 class Server {
   constructor() {
@@ -11,49 +11,52 @@ class Server {
     this.port = process.env.PORT;
 
     // this.authCustomerPath = '/api/auth/customer';
-    this.playerPath = '/api/players';
-    this.formularioPath = '/api/formulario';
-    this.teamPath = '/api/teams';
+    this.playerPath = "/api/players";
+    this.formPath = "/api/form";
+    this.teamPath = "/api/teams";
 
     //conectar a DB
     this.contectDB();
 
     //Middlewares
     this.middlewares();
-    
+
     //Rutas de mi aplicación
     this.routes();
   }
 
-  async contectDB(){
-    try{
+  async contectDB() {
+    try {
       await dbConnectionSql.authenticate();
-      console.log('Base de datos MySql conectado');
-    } catch (error){
-      console.log('error'+error)
+      console.log("Base de datos MySql conectado");
+    } catch (error) {
+      console.log("error" + error);
       // throw new Error( 'error'+error )
     }
   }
-  middlewares(){
+  middlewares() {
     //cors
-    this.app.use( cors()); 
+    this.app.use(cors());
     //lectura y parseo del body
-    this.app.use( express.json() );
-    
+    this.app.use(express.json());
+    //carga de archivos
+    this.app.use(
+      fileUpload({
+        useTempFiles: true,
+        tempFileDir: "/tmp/",
+        createParentPath: true,
+      })
+    );
   }
-
 
   routes() {
-    this.app.use(this.playerPath,require('./routes/player.route'));
-    this.app.use(this.formularioPath,require('./routes/formulario.route'));
-    this.app.use(this.teamPath,require('./routes/team.route'));
-    
-
+    this.app.use(this.playerPath, require("./routes/player.route"));
+    this.app.use(this.formPath, require("./routes/form.route"));
+    this.app.use(this.teamPath, require("./routes/team.route"));
   }
 
-
   listen() {
-    this.app.listen( this.port, () => {
+    this.app.listen(this.port, () => {
       console.log("Servidor correindo en puerto", this.port);
     });
   }

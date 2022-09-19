@@ -30,13 +30,13 @@ const PlayersModel = dbConnection.define("players", {
   },
   points: {
     type: DataTypes.INTEGER,
-    // defaultValue: 2000
+    defaultValue: 2000
   },
   gender: {
     type: DataTypes.STRING,
   },
   state: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     defaultValue: 1
   },
   password: {
