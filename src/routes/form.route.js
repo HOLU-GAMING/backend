@@ -4,7 +4,7 @@ const { validarCampos, validarArchivoSubir } = require("../middleware");
 
 const {
   createPlayer,
-  createTeamPlayers,
+  createTeamPlayerGuests,
 } = require("../controllers/form.controller");
 const router = Router();
 
@@ -17,7 +17,7 @@ router.post(
     check("players", "La lista de jugadores es necesario").not().isArray(),
     validarCampos,
   ],
-  createTeamPlayers
+  createTeamPlayerGuests
 );
 
 module.exports = router;

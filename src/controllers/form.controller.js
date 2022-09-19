@@ -1,11 +1,10 @@
-const { request, response } = require("express");
 const bcryptjs = require("bcryptjs");
 const { omit } = require("lodash");
 
 const cloudinary = require("cloudinary").v2;
 cloudinary.config(process.env.CLOUDINARY_URL);
 
-const { PlayersModel, TeamsModel } = require("../models");
+const { PlayersModel, TeamsModel, GuestsModel } = require("../models");
 
 const createPlayer = async (req = Request, res = Response) => {
   const { body } = req;
@@ -32,7 +31,7 @@ const createPlayer = async (req = Request, res = Response) => {
   }
 };
 
-const createTeamPlayers = async (req = Request, res = Response) => {
+const createTeamPlayerGuests = async (req = Request, res = Response) => {
   const { body } = req;
 
   try {
@@ -53,6 +52,13 @@ const createTeamPlayers = async (req = Request, res = Response) => {
       const salt = bcryptjs.genSaltSync();
       player.password = bcryptjs.hashSync(results.email, salt);
       await player.save();
+      //asociar como invitado
+      const guest = new GuestsModel();
+      guest.id_player = player.id;
+      guest.id_team = team.id;
+      await guest.save();
+      //enviar correo para verificar si es el usuario real
+      
     }
     res.json(omit(team.toJSON(), "createdAt", "updatedAt"));
   } catch (error) {
@@ -65,5 +71,5 @@ const createTeamPlayers = async (req = Request, res = Response) => {
 
 module.exports = {
   createPlayer,
-  createTeamPlayers,
+  createTeamPlayerGuests,
 };

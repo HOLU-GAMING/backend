@@ -42,9 +42,7 @@ const teamGetByName = async (req = Request, res = Response) => {
 
   const team = await TeamsModel.findOne({
     where: {
-      name: {
-        [Op.like]: `%${name}%`,
-      },
+      name: name,
     },
     attributes: { exclude: ["state", "createdAt", "updatedAt"] },
   });

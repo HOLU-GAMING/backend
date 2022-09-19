@@ -12,6 +12,7 @@ const GuestsModel = dbConnection.define("guests", {
   },
   confirmation: {
     type: DataTypes.STRING,
+    defaultValue: 0
   },
   state: {
     type: DataTypes.INTEGER,
