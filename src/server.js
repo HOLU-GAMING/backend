@@ -14,6 +14,7 @@ class Server {
     this.playerPath = "/api/players";
     this.formPath = "/api/form";
     this.teamPath = "/api/teams";
+    this.tournamentPath = "/api/tournament";
 
     //conectar a DB
     this.contectDB();
@@ -53,6 +54,7 @@ class Server {
     this.app.use(this.playerPath, require("./routes/player.route"));
     this.app.use(this.formPath, require("./routes/form.route"));
     this.app.use(this.teamPath, require("./routes/team.route"));
+    this.app.use(this.tournamentPath, require("./routes/tournament.route"));
   }
 
   listen() {

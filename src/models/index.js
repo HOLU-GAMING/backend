@@ -22,6 +22,13 @@ const TournamentOrganizersModel = require('./tournamentOrganizers.model');
 const TournamentsModel = require('./tournaments.model');
 const TypeGamesModel = require('./typeGames.model');
 const TypeTournamentsModel = require('./typeTournaments.model');
+const GamesModel = require('./games.model');
+
+
+TournamentsModel.belongsTo(GamesModel, {foreignKey: 'id_game'});
+TournamentsModel.belongsTo(TypeTournamentsModel, {foreignKey: 'id_type_tournament'});
+TournamentsModel.belongsTo(PlayersModel, {foreignKey: 'id_player'});
+
 
 module.exports = {
     AdwardTeamsModel,
@@ -46,5 +53,6 @@ module.exports = {
     TournamentOrganizersModel,
     TournamentsModel,
     TypeGamesModel,
-    TypeTournamentsModel
+    TypeTournamentsModel,
+    GamesModel
 }

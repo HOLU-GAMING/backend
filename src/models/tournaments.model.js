@@ -7,19 +7,31 @@ const TournamentsModel = dbConnection.define("tournament", {
   id_type_tournament: {
     type: DataTypes.INTEGER,
   },
-  initDay: {
+  id_player:{
+    type: DataTypes.INTEGER,
+  },
+  name:{
+    type: DataTypes.STRING,
+  },
+  init_day: {
     type: DataTypes.DATE,
   },
-  endDay: {
+  end_day: {
     type: DataTypes.DATE,
   },
-  initRegister: {
+  price:{
+    type: DataTypes.DOUBLE,
+  },
+  init_register: {
     type: DataTypes.DATE,
   },
-  endRegister: {
+  end_register: {
     type: DataTypes.DATE,
   },
   cant_players_team: {
+    type: DataTypes.INTEGER,
+  },
+  cant_replacements: {
     type: DataTypes.INTEGER,
   },
   state: {
