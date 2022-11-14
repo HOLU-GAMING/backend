@@ -42,6 +42,9 @@ const PlayersModel = dbConnection.define("players", {
   password: {
     type: DataTypes.STRING,
   },
+  code: {
+    type: DataTypes.STRING,
+  },
   tk_notification: {
     type: DataTypes.STRING,
   },
